@@ -8,7 +8,7 @@ class ResultsController < ApplicationController
   # GET /results.json
   def index
     #@results = @contest.tasks.map{|f|f.results}.flatten.sort{|a,b|b.created_at<=>a.created_at}
-    @results = Result.select("*").joins(:user).page(params[:page]).per(15).where(:task_id => @contest.tasks,'users.role'=>"user")
+    @results = Result.select("*,results.id as id,users.id as user_id").joins(:user).page(params[:page]).per(15).where(:task_id => @contest.tasks,'users.role'=>"user")
   end
 
   def user_index(id)
