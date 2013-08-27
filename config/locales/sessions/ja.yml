@@ -1,0 +1,6 @@
+ja:
+  login:
+    succeed: "ログインしたよ"
+    fail: "ユーザー名かパスワードが違います"
+  logout:
+    succeed: "ログアウトしたよ"

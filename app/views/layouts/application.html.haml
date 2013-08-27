@@ -1,0 +1,37 @@
+!!!
+%html
+  %head
+    %title= content_for?(:title) ? yield(:title) : "Untitled"
+    = stylesheet_link_tag "application", :debug=>true
+    = csrf_meta_tag
+    = yield(:head)
+  %body
+    /{"onload"=>"window.prettyPrint && prettyPrint()"}
+    .container
+      .navbar.navbar-default
+        .navbar-header
+          %button.navbar-toggle{"data-toggle"=>"collapse","data-target"=>".navbar-collapse"}
+            %span.icon-bar
+            %span.icon-bar
+            %span.icon-bar
+          = link_to @contest.name, contest_tasks_path(@contest),:class=>"navbar-brand"
+        .navbar-collapse.collapse
+          %ul.nav.navbar-nav
+            = nav_link '問題', contest_tasks_path(@contest)
+            = nav_link '提出', new_contest_submit_path(@contest)
+            = nav_link '提出状況', contest_results_path(@contest)
+            = nav_link '自分の提出', my_contest_results_path(@contest)
+            = nav_link '順位表', ranking_contest_path(@contest)
+          -#
+            %li{}= link_to '問題', contest_tasks_path(@contest)
+            %li{:class=>""}= link_to '提出', new_contest_submit_path(@contest)
+            %li{:class=>""}= link_to '提出状況', contest_results_path(@contest)
+            %li{:class=>""}= link_to '自分の提出', my_contest_results_path(@contest)
+
+          %ul.nav.navbar-nav.navbar-right
+            %li= current_user ? ( link_to current_user.username,'#' ) : ( link_to 'login',login_path )
+      - flash.each do |name, msg|
+        = content_tag :div, msg, :id => "flash_#{name}"
+      = content_tag :h1, yield(:title) if show_title?
+      = yield
+    = javascript_include_tag "application"

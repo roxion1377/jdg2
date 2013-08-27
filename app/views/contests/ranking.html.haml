@@ -1,0 +1,19 @@
+-title "Ranking",false
+%h1 順位表
+%table.table.table-hover.table-bordered
+  %thead
+    %tr
+      %th #
+      %th user
+      - @tasks.each do |task|
+        %th= task.serial
+      %th Total
+  %tbody
+    - @data.each_with_index do |data,i|
+      %tr
+        %td= i+1
+        %td= data.user.username
+        - @tasks.each do |task|
+          %td= "#{data.task[task.serial].score}(#{data.task[task.serial].wa_num})"
+        %td= "#{data.total_score}(#{data.total_wa_num})"
+

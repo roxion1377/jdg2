@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  memory: 1
+  result_id: 
+  state_id: 1
+  time: 1
+  input: MyString
+
+two:
+  memory: 1
+  result_id: 
+  state_id: 1
+  time: 1
+  input: MyString

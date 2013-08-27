@@ -1,0 +1,23 @@
+- title "Contests",false
+%h1 開催中のコンテスト
+%table.table
+  %thead
+    %tr
+      %th Name
+      %th Begin
+      %th End
+    -#
+      %th
+      %th
+      %th
+  %tbody
+    - for contest in @contests
+      %tr
+        %td= link_to contest.name,contest_tasks_path(contest)
+        %td= l contest.begin
+        %td= l contest.end
+        -#
+          %td= link_to "Show", contest_tasks_path(contest)
+          %td= link_to "Edit", edit_contest_path(contest)
+          %td= link_to "Destroy", contest, :confirm => 'Are you sure?', :method => :delete
+  -#%p= link_to "New Contest", new_contest_path

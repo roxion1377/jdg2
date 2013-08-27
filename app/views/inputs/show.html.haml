@@ -1,0 +1,15 @@
+%p#notice= notice
+
+%p
+  %b Task:
+  = @input.task.id
+%p
+  %b Dir name:
+  = @input.dir_name
+%p
+  %b Score:
+  = @input.score
+
+= link_to 'Edit', edit_input_path(@input)
+\|
+= link_to 'Back', task_inputs_path(@input.task)

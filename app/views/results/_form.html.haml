@@ -1,0 +1,13 @@
+= bootstrap_form_for [@contest,@result],:url=>contest_submit_index_path,:html=>{:role=>'form',class: 'form-horizontal' } do |f|
+  = error_messages(@result.errors)
+  .form-group
+    = f.label :lang_id
+    = f.select :lang_id, {"C++"=>1,"C"=>2},:selected => cookies[:lang_id]
+  .form-group
+    = f.label :task
+    = f.select :task_id,@tasks.map{|f|[f.name,f.id]},:selected=>params[:t]
+  .form-group
+    = f.label :code
+    = f.text_area :code
+  .actions
+    = f.submit 'Submit'

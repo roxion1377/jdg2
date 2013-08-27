@@ -1,0 +1,47 @@
+-title "Detail",false
+%h1 結果
+%table.table
+  %thead
+    %tr
+      %th
+      %th= "info"
+  %tbody
+    %tr
+      %td= "問題"
+      %td= link_to @result.task.name,task_path(@result.task)
+    %tr
+      %td= "ユーザー名"
+      %td= @result.user.username
+    %tr
+      %td= "提出時間"
+      %td= l @result.created_at
+    %tr
+      %td= "言語"
+      %td= ["","C++","C"][@result.lang_id]
+    %tr
+      %td= "状態"
+      %td= @result.state.state_name
+    %tr
+      %td= "点数"
+      %td= @result.score
+
+%label CompileMessage
+%pre= @result.message
+%label SourceCode
+%pre.prettyprint.linenums~ @result.get_code
+
+%table.table.table-hover
+  %thead
+    %tr
+      %th Input
+      %th State
+      %th Time
+      %th Memory
+  %tbody
+    - @details.each do |detail|
+      %tr
+        %td= detail.input
+        %td{:class=>set_class(detail.state)}= detail.state.state_name
+        %td= "#{detail.time} ms"
+        %td= "#{detail.memory} KB"
+

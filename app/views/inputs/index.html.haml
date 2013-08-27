@@ -1,0 +1,23 @@
+%h1 Listing inputs
+
+%table
+  %tr
+    %th Task
+    %th Dir name
+    %th Score
+    %th
+    %th
+    %th
+
+  - @inputs.each do |input|
+    %tr
+      %td= input.task.id
+      %td= input.dir_name
+      %td= input.score
+      %td= link_to 'Show', input
+      %td= link_to 'Edit', edit_input_path(input)
+      %td= link_to 'Destroy', input, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Input', new_task_input_path

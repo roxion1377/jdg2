@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Memory:
+  = @detail.memory
+%p
+  %b Result:
+  = @detail.result
+%p
+  %b State:
+  = @detail.state_id
+%p
+  %b Time:
+  = @detail.time
+%p
+  %b Input:
+  = @detail.input
+
+= link_to 'Edit', edit_detail_path(@detail)
+\|
+= link_to 'Back', details_path

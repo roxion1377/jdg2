@@ -1,0 +1,25 @@
+-title "Submittion",false
+%h1 提出状況
+
+%table.table.table-hover
+  %thead
+    %tr
+      %th 提出時刻
+      %th 問題
+      %th ユーザー名
+      %th 言語
+      %th 点数
+      %th 結果
+      %th 詳細
+  %tbody 
+    - @results.each do |result|
+      %tr
+        %td= l result.created_at
+        %td= link_to result.task.name,task_path(result.task)
+        %td= result.user.username
+        %td= ["","C++","C"][result.lang_id]
+        %td= result.score
+        %td{class:set_class(result.state)}= result.state.state_name
+        %td= link_to '詳細', result
+= paginate @results, :window => 3
+

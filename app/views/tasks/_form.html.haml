@@ -1,0 +1,30 @@
+= bootstrap_form_for shallow_args(@contest,@task) do |f|
+  = error_messages(@task.errors)
+
+  .form-group
+    /= f.label :serial
+    /= f.text_field
+    = f.input :serial
+  .form-group
+    /= f.label :name
+    /= f.text_field :name
+    = f.input :name
+  .form-group
+    /= f.label :tl
+    /= f.input :tl
+    = f.input :tl
+  .form-group
+    /= f.label :ml
+    /= f.number_field :ml
+    = f.input :ml
+  .form-group
+    /= f.label :body
+    /= f.text_area :body
+    = f.input :body
+  .form-group
+    /= f.label :judge_type
+    /= f.number_field :judge_type
+    = f.input :judge_type
+
+  .actions
+    = f.submit 'Save'

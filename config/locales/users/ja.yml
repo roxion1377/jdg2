@@ -1,0 +1,7 @@
+ja:
+  create:
+    succeed: "登録してログインしたよ"
+    fail:
+      username: "アルファベットと数字と._@しか使えない"
+  edit:
+    succeed: "編集したよ"

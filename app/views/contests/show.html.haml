@@ -1,0 +1,16 @@
+- title "Contest"
+%p
+  %strong Name:
+  = @contest.name
+%p
+  %strong Begin:
+  = @contest.begin
+%p
+  %strong End:
+  = @contest.end
+-#
+  %p
+  = link_to "Edit", edit_contest_path(@contest)
+  |
+  \#{link_to "Destroy", @contest, data: {confirm:'Are you sure?', :method => :delete}} |
+  \#{link_to "View All", contests_path}

@@ -1,0 +1,16 @@
+= bootstrap_form_for shallow_args(@task,@input),:html=>{:multipart=> true} do |f|
+  = error_messages(@input.errors)
+
+  .field
+    = f.input :dir_name
+  .field
+    = f.input :score
+  .field
+    = label :data, :input
+    = file_field :data, :input, :multiple => true
+  .field
+    = label :data, :output
+    = file_field :data, :output, :multiple => true
+
+  .actions
+    = f.submit 'Save'

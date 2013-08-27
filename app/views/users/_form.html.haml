@@ -1,0 +1,9 @@
+= bootstrap_form_for @user do |f|
+  = error_messages(@user.errors,"ログインに失敗しました")
+  .form-group
+    = f.input :username
+  .form-group
+    = f.input :password
+  .form-group
+    = f.input :password_confirmation
+  %p= f.submit (@user.new_record? ? "Sign up" : "Update")

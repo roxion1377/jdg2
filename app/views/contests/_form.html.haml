@@ -1,0 +1,10 @@
+= bootstrap_form_for @contest do |f|
+  = error_messages(@contest.errors)
+
+  .form-group
+    = f.input :name
+  .form-group
+    = f.input :begin, :label => "Begin"
+  .form-group
+    = f.input :end, :label => "End"
+  %p= f.submit "作る"

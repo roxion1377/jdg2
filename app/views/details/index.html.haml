@@ -1,0 +1,27 @@
+%h1 Listing details
+
+%table
+  %tr
+    %th Memory
+    %th Result
+    %th State
+    %th Time
+    %th Input
+    %th
+    %th
+    %th
+
+  - @details.each do |detail|
+    %tr
+      %td= detail.memory
+      %td= detail.result
+      %td= detail.state_id
+      %td= detail.time
+      %td= detail.input
+      %td= link_to 'Show', detail
+      %td= link_to 'Edit', edit_detail_path(detail)
+      %td= link_to 'Destroy', detail, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Detail', new_detail_path

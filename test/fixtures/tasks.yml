@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  tl: 1
+  ml: 1
+  body: MyText
+  judge_type: 1
+  contest_id: 
+
+two:
+  name: MyString
+  tl: 1
+  ml: 1
+  body: MyText
+  judge_type: 1
+  contest_id: 

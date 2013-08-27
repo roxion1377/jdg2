@@ -1,0 +1,28 @@
+-title "Tasks",false
+%h1 問題
+
+%table.table.table-hover
+  %thead
+    %tr
+      %th #
+      %th Name
+      %th Tl
+      %th Ml
+    -#
+      %th
+      %th
+      %th
+  %tbody 
+    - @tasks.each do |task|
+      %tr
+        %td= task.serial
+        %td= link_to task.name, task_path(task)
+        %td= "#{task.tl} s"
+        %td= "#{task.ml} MB"
+      -#
+        %td= task.contest
+        %td= link_to 'Show', task_path(task)
+        %td= link_to 'Edit', edit_task_path(task)
+        %td= link_to 'Destroy', task, :method => :delete, :data => { :confirm => 'Are you sure?' }
+  
+/= link_to 'New Task', new_contest_task_path
