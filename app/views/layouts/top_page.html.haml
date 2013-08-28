@@ -16,7 +16,11 @@
           = link_to 'Jdg', contests_path,:class=>"navbar-brand"
         .navbar-collapse.collapse
           %ul.nav.navbar-nav.navbar-right
-            %li= current_user ? ( link_to current_user.username,'#' ) : ( link_to 'login',login_path )
+            - if logged_in?
+              %li= link_to current_user.username,'#'
+              %li= link_to 'logout',logout_path
+            - else
+              %li= link_to 'login',login_path
       - flash.each do |name, msg|
         = content_tag :div, msg, :id => "flash_#{name}"
       = content_tag :h1, yield(:title) if show_title?

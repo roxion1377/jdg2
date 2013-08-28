@@ -40,4 +40,7 @@ module ApplicationHelper
     }
     return sanitize Kramdown::Document.new(text,options).to_html
   end
+  def admin?
+    logged_in? && current_user.admin?
+  end
 end

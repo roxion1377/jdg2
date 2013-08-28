@@ -1,6 +1,6 @@
 class ResultsController < ApplicationController
   before_action :login_required, only: [:new,:create]
-  before_action :set_result_contest, only: [:index, :new, :create, :user_index, :my_results]
+  before_action :set_result_contest, only: [:index, :new, :create, :user_index, :my_results, :user_results]
   before_action :set_result, only: [:show]
   before_action(:only=>[:show],:if=>:other_submittion?) {|c| contest_end(@contest.id)}
 
@@ -8,17 +8,22 @@ class ResultsController < ApplicationController
   # GET /results.json
   def index
     #@results = @contest.tasks.map{|f|f.results}.flatten.sort{|a,b|b.created_at<=>a.created_at}
+    user_index params[:user] and return if params[:user]
     @results = Result.select("*,results.id as id,users.id as user_id").joins(:user).page(params[:page]).per(15).where(:task_id => @contest.tasks,'users.role'=>"user")
   end
 
   def user_index(id)
     #@results = @contest.tasks.map{|f|f.results.where(:user_id=>id)}.flatten.sort{|a,b|b.created_at<=>a.created_at}
-    @results = Result.page(params[:page]).per(15).where(:task_id => @contest.tasks,:user_id=>id)
+    @results = Result.select("*,results.id as id,users.id as user_id").joins(:user).page(params[:page]).per(15).where(:task_id => @contest.tasks,:user_id=>id,'users.role'=>"user")
     render 'index'
   end
 
   def my_results
     current_user ? user_index(current_user.id) : index
+  end
+
+  def user_results
+    user_index params[:user_id]
   end
 
   # GET /results/1

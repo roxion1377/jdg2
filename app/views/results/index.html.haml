@@ -16,7 +16,7 @@
       %tr
         %td= l result.created_at
         %td= link_to result.task.name,task_path(result.task)
-        %td= result.user.username
+        %td= link_to result.user.username,contest_results_path(@contest,:user=>result.user)
         %td= ["","C++","C"][result.lang_id]
         %td= result.score
         %td{class:set_class(result.state)}= result.state.state_name

@@ -2,12 +2,11 @@
 %div.main
   %h1= "#{@task.serial}:#{@task.name}"
   %p= "TLE: #{@task.tl} s | MLE: #{@task.ml} MB | JudgeType: #{@task.judge_type}"
+  - if admin?
+    %p= link_to "問題の編集",edit_task_path(@task)
+    %p= link_to "入力の編集",task_inputs_path(@task)
   
   .task-body
     ~ markdown @task.body
 
   = link_to 'Submit', new_contest_submit_path(@task.contest,:t=>@task.id),{:class=>["btn","btn-default"]}
-
-= link_to 'Edit', edit_task_path(@task)
-\|
-= link_to 'Back', contest_tasks_path(@task.contest)
