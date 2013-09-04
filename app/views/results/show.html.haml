@@ -19,6 +19,9 @@
       %td= "言語"
       %td= ["","C++","C"][@result.lang_id]
     %tr
+      %td= "コードサイズ"
+      %td= "#{@result.code_size} Byte"
+    %tr
       %td= "状態"
       %td= @result.state.state_name
     %tr

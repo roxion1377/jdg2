@@ -14,7 +14,11 @@ class ResultsController < ApplicationController
 
   def user_index(id)
     #@results = @contest.tasks.map{|f|f.results.where(:user_id=>id)}.flatten.sort{|a,b|b.created_at<=>a.created_at}
-    @results = Result.select("*,results.id as id,users.id as user_id").joins(:user).page(params[:page]).per(15).where(:task_id => @contest.tasks,:user_id=>id,'users.role'=>"user")
+    if logged_in? && current_user.admin?
+      @results = Result.select("*,results.id as id,users.id as user_id").joins(:user).page(params[:page]).per(15).where(:task_id => @contest.tasks,:user_id=>id)
+    else
+      @results = Result.select("*,results.id as id,users.id as user_id").joins(:user).page(params[:page]).per(15).where(:task_id => @contest.tasks,:user_id=>id,'users.role'=>"user")
+    end
     render 'index'
   end
 

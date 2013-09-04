@@ -24,6 +24,7 @@ class Result < ActiveRecord::Base
     self.score = 0
     self.message = ""
     self.state_id = 9
+    self.code_size = self.code.bytesize
     ret = self.save
     return ret unless ret
     path = "judge_data/#{self.id}"

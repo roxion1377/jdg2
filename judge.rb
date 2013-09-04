@@ -13,8 +13,8 @@ puts "./db/#{ENV['RAILS_ENV']}.sqlite3"
 #print Benchmark.realtime {
   ActiveRecord::Base.establish_connection(
                                           :adapter=> 'sqlite3',
-#                                          :database=> "./db/#{ENV['RAILS_ENV']}.sqlite3",
-                                          :database => "./db/development.sqlite3",
+                                          :database=> "./db/production.sqlite3",
+#                                          :database => "./db/#{ENV['RAILS_ENV']}.sqlite3",
                                           :pool => 5,
                                           :timeout=> 5000
                                           )
@@ -129,9 +129,12 @@ class Judge
   end
 
   def run
+    o = (`du -k ./task_data/#{@result.task.id}/data/**/out/* | cut -f 1`)
+    p o.to_s
+    ol = o.to_s.split('\n').map(&:to_i).max
     case @result.lang_id
     when 1,2
-      cmd_be("ruby run1.rb #{@dir_be} #{@result.task.tl} #{@result.task.ml}")
+      cmd_be("ruby run1.rb #{@dir_be} #{@result.task.tl} #{@result.task.ml} #{ol*2}")
     else
     end
   end
@@ -170,8 +173,20 @@ class Judge
           code = f.gets.scanf("Exit code: %d")[0]
           mem = f.gets.scanf("%s %d")[1]
           time = (f.gets.scanf("%s %f")[1]*1000).to_i
+          puts code
           if code != 0
-            detail.state_id = 6
+            if code < 128
+              detail.state_id = 6
+            else
+              if code == 137
+                detail.state_id = 5
+              elsif code == 153
+                detail.state_id = 10
+                p "d"
+              else
+                detail.state_id = 4
+              end
+            end
             tac = false
           elsif mem > @result.task.ml*1024
             detail.state_id = 4
@@ -198,7 +213,10 @@ class Judge
           end
         end
         detail.save
-        state = [state,detail.state_id].min
+        state = 10 if detail.state_id == 10
+        if state != 10
+          state = [state,detail.state_id].min
+        end
       }
       if tac
         score += data.score

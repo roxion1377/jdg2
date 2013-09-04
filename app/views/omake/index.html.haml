@@ -1,0 +1,16 @@
+%h1 Listing omakes
+
+%table
+  %tr
+    %th
+    %th
+    %th
+
+  - @omakes.each do |omake|
+    %tr
+      %td= link_to 'Show', omake
+      %td= link_to 'Edit', edit_omake_path(omake)
+      %td= link_to 'Destroy', omake, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+

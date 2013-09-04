@@ -1,6 +1,16 @@
 Judge::Application.routes.draw do
 
+  resources :contests do
+    member do
+      get :omake do
+        resources :tasks
+      end
+    end
+  end
   resources :contests,shallow: true do
+#    resources :omake do
+#      resources :tasks
+#    end
     member do
       get 'ranking'
     end

@@ -1,0 +1,16 @@
+- title "Ranking",false
+%h1 順位表
+- @data.each do |d|
+  %h2= d.task.name
+  %table.table.table-hover
+    %thead
+      %tr
+        %th sugosa
+        %th user
+        %th size
+    %tbody
+      - d.user.each_with_index do |u,i|
+        %tr
+          %td= i
+          %td= u.name
+          %td= "#{u.code_size} Byte"

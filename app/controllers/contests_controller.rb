@@ -10,6 +10,35 @@ class ContestsController < ApplicationController
   end
 
   def ranking
+    case @contest.judge_type
+    when 1
+      pck_ranking
+    when 2
+      golf_ranking
+    end
+  end
+
+  def golf_ranking
+    tasks = @contest.tasks
+    user_data = Struct.new("User",:name,:code_size)
+    data_s = Struct.new("Data",:task,:user)
+    #users = @contest.users.where(:role => "user")
+    @data = []
+    tasks.each do |task|
+      u = []
+      ch = {}
+      res = task.results.order("code_size,created_at")
+      res.each do |r|
+        next if ch[r.user.id] || r.user.role != "user"
+        ch[r.user.id] = true
+        u << user_data.new(r.user.username,r.code_size)
+      end
+      @data << data_s.new(task,u)
+    end
+    render 'golf_ranking'
+  end
+
+  def pck_ranking
     task_data = Struct.new("TaskData",:score,:state,:wa_num)
     data_s = Struct.new("Data",:user,:total_score,:task,:total_wa_num,:last_ac)
     @data = []
@@ -57,6 +86,7 @@ class ContestsController < ApplicationController
       (a.total_wa_num <=> b.total_wa_num).nonzero? ||
       (a.last_ac <=> b.last_ac)
     }
+    render 'pck_ranking'
   end
 
   def show
@@ -96,6 +126,6 @@ class ContestsController < ApplicationController
     @contest = Contest.find(params[:id])
   end
   def contest_params
-    params.require(:contest).permit(:name,:begin,:end)
+    params.require(:contest).permit(:name,:begin,:end,:judge_type)
   end
 end

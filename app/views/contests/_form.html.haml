@@ -7,4 +7,6 @@
     = f.input :begin, :label => "Begin"
   .form-group
     = f.input :end, :label => "End"
+  .form-group
+    = f.select :judge_type, {"PCK"=>1,"Golf"=>2}
   %p= f.submit "作る"

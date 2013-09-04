@@ -18,4 +18,5 @@
         - if admin?
           %td= link_to "Edit", edit_contest_path(contest)
           %td= link_to "Destroy", contest, :confirm => 'Are you sure?', :method => :delete
-  -#%p= link_to "New Contest", new_contest_path
+- if admin?
+  %p= link_to "New Contest", new_contest_path

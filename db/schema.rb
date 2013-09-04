@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130827015937) do
+ActiveRecord::Schema.define(version: 20130904020730) do
 
   create_table "contest_admins", force: true do |t|
     t.integer  "user_id"
@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20130827015937) do
     t.datetime "end"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "judge_type"
   end
 
   create_table "details", force: true do |t|
@@ -63,6 +64,11 @@ ActiveRecord::Schema.define(version: 20130827015937) do
 
   add_index "inputs", ["task_id"], name: "index_inputs_on_task_id"
 
+  create_table "omakes", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "results", force: true do |t|
     t.integer  "lang_id"
     t.text     "message"
@@ -73,6 +79,7 @@ ActiveRecord::Schema.define(version: 20130827015937) do
     t.integer  "score"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "code_size"
   end
 
   add_index "results", ["contest_id"], name: "index_results_on_contest_id"

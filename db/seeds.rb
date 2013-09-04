@@ -16,4 +16,8 @@ State.create!(:state_name=>"RuntimeError")
 State.create!(:state_name=>"WrongAnswer")
 State.create!(:state_name=>"Accepted")
 State.create!(:state_name=>"Waiting")
+State.create!(:state_name=>"OutputLimitExceeded")
 
+unless User.exists?( :username => 'root' )
+  User.create!(:username => 'root',:password => 'admin', :role => 'admin')
+end

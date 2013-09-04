@@ -8,6 +8,9 @@
 %p
   %strong End:
   = @contest.end
+%p
+  %strong JudgeType
+  = @contest.judge_type
 -#
   %p
   = link_to "Edit", edit_contest_path(@contest)
